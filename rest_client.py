@@ -10,21 +10,26 @@ class RestClient(object):
         self.token = None
 
     def authorize(self, username, extension, password):
-        url = urlparse.urljoin(self.server, '/restapi/oauth/token')
         data = {
             'username': username,
             'extension': extension,
             'password': password,
             'grant_type': 'password'
         }
-        headers = {
-            'Authorization': self._autorization_header()
-        }
-        r = requests.post(url, data = data, headers = headers)
+        r = self.post('/restapi/oauth/token', data)
         self.token = r.json()
 
     def get(self, endpoint, params = None):
         return self._request('GET', endpoint, params)
+
+    def post(self, endpoint, data = None, params = None):
+        return self._request('POST', endpoint, params, data)
+
+    def put(self, endpoint, data = None, params = None):
+        return self._request('PUT', endpoint, params, data)
+
+    def delete(self, endpoint, params = None):
+        return self._request('DELETE', endpoint, params)
 
     def _autorization_header(self):
         if self.token:
