@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../src'))
+
 from rest_client import RestClient
 from env import appKey, appSecret, server, username, extension, password, receiver
 
