@@ -24,11 +24,7 @@ class RestClient(object):
         self.token = r.json()
 
     def get(self, endpoint, params = None):
-        url = urlparse.urljoin(self.server, endpoint)
-        headers = {
-            'Authorization': self._autorization_header()
-        }
-        return requests.get(url, params = params, headers = headers)
+        return self._request('GET', endpoint, params)
 
     def _autorization_header(self):
         if self.token:
@@ -37,3 +33,8 @@ class RestClient(object):
 
     def _basic_key(self):
         return base64.b64encode('{appKey}:{appSecret}'.format(appKey = self.appKey, appSecret = self.appSecret))
+
+    def _request(self, method, endpoint, params = None, data = None):
+        url = urlparse.urljoin(self.server, endpoint)
+        headers = { 'Authorization': self._autorization_header() }
+        return requests.request(method, url, params = params, data = data, headers = headers)
