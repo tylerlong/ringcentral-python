@@ -25,4 +25,4 @@ password=password
 receiver=number-to-receiver-sms
 ```
 
-Run `python main.py`
+Run `python test/main.py`

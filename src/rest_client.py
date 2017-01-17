@@ -1,6 +1,7 @@
 import urlparse
 import requests
 import base64
+from subscription import Subscription
 
 class RestClient(object):
     def __init__(self, appKey, appSecret, server):
@@ -30,6 +31,9 @@ class RestClient(object):
 
     def delete(self, endpoint, params = None):
         return self._request('DELETE', endpoint, params)
+
+    def subscription(self, event_filters, callback):
+        return Subscription(self, event_filters, callback)
 
     def _autorization_header(self):
         if self.token:
