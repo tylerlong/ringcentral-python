@@ -4,4 +4,4 @@ class RestClient(object):
         self.appSecret = appSecret
         self.server = server
     def authorize(self, username, extension, password):
-        print('authorize')
+        print(username)
