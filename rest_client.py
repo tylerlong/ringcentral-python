@@ -16,17 +16,17 @@ class RestClient(object):
             'password': password,
             'grant_type': 'password'
         }
-        r = self.post('/restapi/oauth/token', data)
+        r = self.post('/restapi/oauth/token', data = data)
         self.token = r.json()
 
     def get(self, endpoint, params = None):
         return self._request('GET', endpoint, params)
 
-    def post(self, endpoint, data = None, params = None):
-        return self._request('POST', endpoint, params, data)
+    def post(self, endpoint, json = None, params = None, data = None):
+        return self._request('POST', endpoint, params, json, data)
 
-    def put(self, endpoint, data = None, params = None):
-        return self._request('PUT', endpoint, params, data)
+    def put(self, endpoint, json = None, params = None, data = None):
+        return self._request('PUT', endpoint, params, json, data)
 
     def delete(self, endpoint, params = None):
         return self._request('DELETE', endpoint, params)
@@ -39,7 +39,7 @@ class RestClient(object):
     def _basic_key(self):
         return base64.b64encode('{appKey}:{appSecret}'.format(appKey = self.appKey, appSecret = self.appSecret))
 
-    def _request(self, method, endpoint, params = None, data = None):
+    def _request(self, method, endpoint, params = None, json = None, data = None):
         url = urlparse.urljoin(self.server, endpoint)
         headers = { 'Authorization': self._autorization_header() }
-        return requests.request(method, url, params = params, data = data, headers = headers)
+        return requests.request(method, url, params = params, data = data, json = json, headers = headers)
