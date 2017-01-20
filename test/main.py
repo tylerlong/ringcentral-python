@@ -38,8 +38,8 @@ def test_CRUD():
     print r.status_code
 
 def test_PubNub():
-    def message_callback(message):
-        print message
+    def message_callback(json):
+        print json
     events = ['/restapi/v1.0/account/~/extension/~/message-store']
     subscription = rc.subscription(events, message_callback)
     subscription.subscribe()
