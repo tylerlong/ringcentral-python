@@ -1,11 +1,19 @@
 from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub
+from pubnub.callbacks import SubscribeCallback
 
 class Subscription(object):
-    def __init__(self, rest_client, events, callback):
+    def __init__(self, rest_client, events, message_callback, status_callback = None, presence_callback = None):
         self.rc = rest_client
         self.events = events
-        self.callback = callback()
+        class MySubscribeCallback(SubscribeCallback):
+            def status(self, pubnub, status):
+                status_callback and status_callback(status)
+            def presence(self, pubnub, presence):
+                presence_callback and presence_callback(presence)
+            def message(self, pubnub, message):
+                message_callback and message_callback(message)
+        self.callback = MySubscribeCallback()
 
     def subscribe(self):
         r = self.rc.post('/restapi/v1.0/subscription', self._request_body())

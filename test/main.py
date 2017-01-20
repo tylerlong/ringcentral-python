@@ -38,20 +38,10 @@ def test_CRUD():
     print r.status_code
 
 def test_PubNub():
-    from pubnub.callbacks import SubscribeCallback
-
-    class MySubscribeCallback(SubscribeCallback):
-        def status(self, pubnub, status):
-            print status
-
-        def presence(self, pubnub, presence):
-            print presence
-
-        def message(self, pubnub, message):
-            print message
-
+    def message_callback(message):
+        print message
     events = ['/restapi/v1.0/account/~/extension/~/message-store']
-    subscription = rc.subscription(events, MySubscribeCallback)
+    subscription = rc.subscription(events, message_callback)
     subscription.subscribe()
 
     data = {
@@ -60,9 +50,8 @@ def test_PubNub():
         'text': "hello world"
     }
     r = rc.post('/restapi/v1.0/account/~/extension/~/sms', data)
-    print r.status_code
 
-    time.sleep(30) # wait for PubNub notifications
+    time.sleep(20) # wait for PubNub notifications
 
 
 # test_CRUD()
