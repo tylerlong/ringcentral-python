@@ -25,4 +25,10 @@ password=password
 receiver=number-to-receiver-sms
 ```
 
-Run `python test/main.py`
+Run `python test/index.py`
+
+
+
+## todo
+
+- release to pip
