@@ -41,6 +41,18 @@ class RestClient(object):
         self.token = None
         return self.post('/restapi/oauth/revoke', data = data)
 
+    def authorize_uri(self, redirect_uri, state = ''):
+        url = urlparse.urljoin(self.server, '/restapi/oauth/authorize')
+        params = {
+            'response_type': 'code',
+            'state': state,
+            'redirect_uri': redirect_uri,
+            'client_id': self.appKey
+        }
+        req = requests.PreparedRequest()
+        req.prepare_url(url, params = params)
+        return req.url
+
     def get(self, endpoint, params = None):
         return self._request('GET', endpoint, params)
 

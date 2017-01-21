@@ -18,3 +18,5 @@ print 'refreshed'
 r = rc.revoke()
 print r.status_code
 print 'revoked'
+
+print rc.authorize_uri('http://baidu.com', 'state')

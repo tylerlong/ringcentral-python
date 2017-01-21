@@ -32,3 +32,5 @@ Run `python test/index.py`
 ## todo
 
 - release to pip
+- use a real testing framework
+- ci and testing coverage
