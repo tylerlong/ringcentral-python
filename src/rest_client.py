@@ -3,6 +3,9 @@ import requests
 import base64
 from subscription import Subscription
 
+SANDBOX_SERVER = "https://platform.devtest.ringcentral.com"
+PRODUCTION_SERVER = "https://platform.ringcentral.com"
+
 class RestClient(object):
     def __init__(self, appKey, appSecret, server):
         self.appKey = appKey
@@ -19,6 +22,24 @@ class RestClient(object):
         }
         r = self.post('/restapi/oauth/token', data = data)
         self.token = r.json()
+        return r
+
+    def refresh(self):
+        data = {
+            'grant_type': 'refresh_token',
+            'refresh_token': self.token['refresh_token'],
+        }
+        self.token = None
+        r = self.post('/restapi/oauth/token', data = data)
+        self.token = r.json()
+        return r
+
+    def revoke(self):
+        data = {
+            'token': self.token['access_token']
+        }
+        self.token = None
+        return self.post('/restapi/oauth/revoke', data = data)
 
     def get(self, endpoint, params = None):
         return self._request('GET', endpoint, params)
