@@ -3,6 +3,7 @@ from pubnub.pubnub import PubNub
 from pubnub.callbacks import SubscribeCallback
 from Cryptodome.Cipher import AES
 import base64
+from threading import Timer
 
 class Subscription(object):
     def __init__(self, rest_client, events, message_callback, status_callback = None, presence_callback = None):
@@ -20,6 +21,21 @@ class Subscription(object):
                 json = aes.decrypt(base64.b64decode(message.message)).decode('utf-8')
                 message_callback(json)
         self.callback = MySubscribeCallback()
+        self._subscription = None
+        self._timer = None
+
+    @property
+    def subscription(self):
+        return self._subscription
+
+    @subscription.setter
+    def subscription(self, value):
+        self._subscription = value
+        print value
+        if self._timer:
+            self._timer.cancel()
+        self._timer = Timer(value['expiresIn'] - 120, self.refresh)
+        self._timer.start()
 
     def subscribe(self):
         r = self.rc.post('/restapi/v1.0/subscription', self._request_body())
