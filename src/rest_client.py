@@ -79,4 +79,6 @@ class RestClient(object):
     def _request(self, method, endpoint, params = None, json = None, data = None):
         url = urlparse.urljoin(self.server, endpoint)
         headers = { 'Authorization': self._autorization_header() }
-        return requests.request(method, url, params = params, data = data, json = json, headers = headers)
+        r = requests.request(method, url, params = params, data = data, json = json, headers = headers)
+        r.raise_for_status()
+        return r

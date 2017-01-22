@@ -26,7 +26,6 @@ class Subscription(object):
         self.subscription = r.json()
         pnconfig = PNConfiguration()
         pnconfig.subscribe_key = self.subscription['deliveryMode']['subscriberKey']
-        pnconfig.publish_key = ''
         self.pubnub = PubNub(pnconfig)
         self.pubnub.add_listener(self.callback)
         self.pubnub.subscribe().channels(self.subscription['deliveryMode']['address']).execute()
