@@ -13,13 +13,20 @@ class RestClient(object):
         self.server = server
         self.token = None
 
-    def authorize(self, username, extension, password):
-        data = {
-            'username': username,
-            'extension': extension,
-            'password': password,
-            'grant_type': 'password'
-        }
+    def authorize(self, username = None, extension = None, password = None, auth_code = None, redirect_uri = None):
+        if auth_code:
+            data = {
+                'grant_type': "authorization_code",
+                'code': auth_code,
+                'redirect_uri': redirectUri,
+            }
+        else:
+            data = {
+                'grant_type': 'password',
+                'username': username,
+                'extension': extension,
+                'password': password,
+            }
         r = self.post('/restapi/oauth/token', data = data)
         self.token = r.json()
         return r
