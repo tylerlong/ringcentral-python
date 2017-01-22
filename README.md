@@ -34,3 +34,6 @@ Run `python test/index.py`
 - release to pip
 - use a real testing framework
 - ci and testing coverage
+- auto refresh pubnub
+- add a sample for fax sending
+- add a sample for binary downloading
