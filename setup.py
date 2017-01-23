@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ringcentral_client',
-    version='0.1.0',
+    version='0.1.1',
     description='Python Client for RingCentral API',
     author='Tyler Long',
     author_email='tyler.liu@ringcentral.com',
