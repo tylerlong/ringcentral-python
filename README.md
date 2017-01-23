@@ -133,6 +133,5 @@ Run `python -m unittest discover`
 ### todo
 
 - release to pip
-- use a real testing framework
 - ci and testing coverage
 - add a sample for binary uploading/downloading
