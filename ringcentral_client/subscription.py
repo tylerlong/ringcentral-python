@@ -31,7 +31,6 @@ class Subscription(object):
     @subscription.setter
     def subscription(self, value):
         self._subscription = value
-        print value
         if self._timer:
             self._timer.cancel()
         self._timer = Timer(value['expiresIn'] - 120, self.refresh)
