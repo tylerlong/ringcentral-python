@@ -3,8 +3,8 @@ import requests
 import base64
 from subscription import Subscription
 
-SANDBOX_SERVER = "https://platform.devtest.ringcentral.com"
-PRODUCTION_SERVER = "https://platform.ringcentral.com"
+SANDBOX_SERVER = 'https://platform.devtest.ringcentral.com'
+PRODUCTION_SERVER = 'https://platform.ringcentral.com'
 
 class RestClient(object):
     def __init__(self, appKey, appSecret, server):
@@ -16,7 +16,7 @@ class RestClient(object):
     def authorize(self, username = None, extension = None, password = None, auth_code = None, redirect_uri = None):
         if auth_code:
             data = {
-                'grant_type': "authorization_code",
+                'grant_type': 'authorization_code',
                 'code': auth_code,
                 'redirect_uri': redirectUri,
             }

@@ -1,6 +1,6 @@
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../ringcentral_client'))
 
 import time
 from rest_client import RestClient
@@ -22,7 +22,7 @@ def test_PubNub():
     data = {
         'from': { 'phoneNumber': username },
         'to': [{ 'phoneNumber': receiver }],
-        'text': "hello world"
+        'text': 'hello world'
     }
     r = rc.post('/restapi/v1.0/account/~/extension/~/sms', data)
 
