@@ -12,7 +12,6 @@ from rest_client import RestClient
 
 class BaseTestCase(unittest.TestCase):
     def setUp(self):
-        print 'setUp'
         self.production = os.environ.get('production') == 'true'
         self.appKey = os.environ.get('appKey')
         self.appSecret = os.environ.get('appSecret')
@@ -25,6 +24,5 @@ class BaseTestCase(unittest.TestCase):
         self.rc.authorize(self.username, self.extension, self.password)
 
     def tearDown(self):
-        print 'tearDown'
         self.rc.revoke()
         time.sleep(10)

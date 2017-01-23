@@ -39,6 +39,8 @@ class RestClient(object):
         return r
 
     def revoke(self):
+        if self.token == None:
+            return
         data = {
             'token': self.token['access_token']
         }
