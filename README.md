@@ -65,7 +65,7 @@ print r.status_code
 
 ```python
 def message_callback(message):
-        print message
+    print message
 
 # subscribe
 events = ['/restapi/v1.0/account/~/extension/~/message-store']
