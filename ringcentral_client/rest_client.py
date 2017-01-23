@@ -3,9 +3,6 @@ import requests
 import base64
 from subscription import Subscription
 
-SANDBOX_SERVER = 'https://platform.devtest.ringcentral.com'
-PRODUCTION_SERVER = 'https://platform.ringcentral.com'
-
 class RestClient(object):
     def __init__(self, appKey, appSecret, server):
         self.appKey = appKey
@@ -63,11 +60,11 @@ class RestClient(object):
     def get(self, endpoint, params = None):
         return self._request('GET', endpoint, params)
 
-    def post(self, endpoint, json = None, params = None, data = None):
-        return self._request('POST', endpoint, params, json, data)
+    def post(self, endpoint, json = None, params = None, data = None, files = None):
+        return self._request('POST', endpoint, params, json, data, files)
 
-    def put(self, endpoint, json = None, params = None, data = None):
-        return self._request('PUT', endpoint, params, json, data)
+    def put(self, endpoint, json = None, params = None, data = None, files = None):
+        return self._request('PUT', endpoint, params, json, data, files)
 
     def delete(self, endpoint, params = None):
         return self._request('DELETE', endpoint, params)
@@ -83,9 +80,9 @@ class RestClient(object):
     def _basic_key(self):
         return base64.b64encode('{appKey}:{appSecret}'.format(appKey = self.appKey, appSecret = self.appSecret))
 
-    def _request(self, method, endpoint, params = None, json = None, data = None):
+    def _request(self, method, endpoint, params = None, json = None, data = None, files = None):
         url = urlparse.urljoin(self.server, endpoint)
         headers = { 'Authorization': self._autorization_header() }
-        r = requests.request(method, url, params = params, data = data, json = json, headers = headers)
+        r = requests.request(method, url, params = params, data = data, json = json, files = files, headers = headers)
         r.raise_for_status()
         return r

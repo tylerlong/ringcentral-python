@@ -82,6 +82,17 @@ subscription.refresh()
 subscription.revoke()
 ```
 
+### Send fax
+
+```python
+files = [
+    ('json', ('request.json', json.dumps({ 'to': [{ 'phoneNumber': receiver }] }), 'application/json')),
+    ('attachment', ('test.txt', 'Hello world', 'text/plain')),
+    ('attachment', ('test.png', open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb'), 'image/png')),
+]
+r = rc.post('/restapi/v1.0/account/~/extension/~/fax', files = files)
+print r.status_code
+```
 
 
 ---
@@ -124,5 +135,4 @@ Run `python test/index.py`
 - release to pip
 - use a real testing framework
 - ci and testing coverage
-- add a sample for fax sending
-- add a sample for binary downloading
+- add a sample for binary uploading/downloading
