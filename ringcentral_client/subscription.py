@@ -33,8 +33,9 @@ class Subscription(object):
         self._subscription = value
         if self._timer:
             self._timer.cancel()
-        self._timer = Timer(value['expiresIn'] - 120, self.refresh)
-        self._timer.start()
+        if value:
+            self._timer = Timer(value['expiresIn'] - 120, self.refresh)
+            self._timer.start()
 
     def subscribe(self):
         r = self.rc.post('/restapi/v1.0/subscription', self._request_body())

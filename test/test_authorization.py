@@ -19,3 +19,8 @@ class AuthorizationTestCase(BaseTestCase):
     def test_revoke(self):
         self.rc.revoke()
         self.assertEqual(None, self.rc.token)
+
+
+if __name__ == '__main__':
+    import unittest
+    unittest.main()
