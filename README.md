@@ -3,14 +3,29 @@
 RingCentral Python Client library
 
 
-## Setup
+## Installation
+
+```
+pip install git+git://github.com/tylerlong/ringcentral-python.git
+```
+
+---
+
+---
+
+---
+
+
+## Below is for maintainers of this library
+
+### Setup
 
 ```
 pip install -Ur requirements.txt
 ```
 
 
-## How to test
+### How to test
 
 Create `.env` file with the following content:
 
@@ -29,7 +44,7 @@ Run `python test/index.py`
 
 
 
-## todo
+### todo
 
 - release to pip
 - use a real testing framework
