@@ -126,7 +126,7 @@ password=password
 receiver=number-to-receiver-sms
 ```
 
-Run `python test/index.py`
+Run `python -m unittest discover`
 
 
 
