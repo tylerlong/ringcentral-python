@@ -49,7 +49,7 @@ class Subscription(object):
     def refresh(self):
         if not self.subscription:
             return
-        r = self.rc.post('/restapi/v1.0/subscription', self._request_body())
+        r = self.rc.put('/restapi/v1.0/subscription/{id}'.format(id = self.subscription['id']), self._request_body())
         self.subscription = r.json()
 
     def revoke(self):

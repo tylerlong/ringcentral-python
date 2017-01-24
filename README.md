@@ -161,6 +161,8 @@ receiver=number-to-receiver-sms
 
 Run `python -m unittest discover`
 
+Run a specific test case: `python -m unittest test.test_authorization.AuthorizationTestCase`
+
 
 ### Release new version
 
