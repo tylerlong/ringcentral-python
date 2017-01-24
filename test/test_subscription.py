@@ -13,6 +13,10 @@ class SubscriptionTestCase(BaseTestCase):
         self.subscription = self.rc.subscription(events, self.message_callback)
         self.subscription.subscribe()
 
+        # refresh
+        # call refresh manually shouldn't break anything
+        self.subscription.refresh()
+
         # send an SMS to tigger a notification
         data = {
             'from': { 'phoneNumber': self.username },
