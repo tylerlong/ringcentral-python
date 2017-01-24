@@ -9,11 +9,17 @@ RingCentral Python Client library
 pip install ringcentral_client
 ```
 
-or
+Or install from GitHub directly:
 
 ```
 pip install git+git://github.com/tylerlong/ringcentral-python.git
 ```
+
+
+## Documentation
+
+https://developer.ringcentral.com/api-docs/latest/index.html
+
 
 ## Usage
 
@@ -176,3 +182,4 @@ python setup.py sdist upload
 ### todo
 
 - ci and testing coverage
+- Support python 3
