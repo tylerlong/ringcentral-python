@@ -3,12 +3,9 @@ from dotenv import load_dotenv, find_dotenv
 import unittest
 import sys
 import time
+from ringcentral_client import RestClient
 
 load_dotenv(find_dotenv())
-
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../ringcentral_client'))
-from rest_client import RestClient
-
 
 class BaseTestCase(unittest.TestCase):
     def setUp(self):
