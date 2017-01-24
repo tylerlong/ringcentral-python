@@ -4,6 +4,6 @@ python:
 install:
   pip install -Ur requirements.txt
 script:
-  coverage run -m unittest discover
+  coverage run --source=./ringcentral_client/ -m unittest discover
 after_success:
   coveralls

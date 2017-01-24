@@ -1,6 +1,7 @@
 # ringcentral-python
 
 [![Build status](https://api.travis-ci.org/tylerlong/ringcentral-python.svg?branch=master)](https://travis-ci.org/tylerlong/ringcentral-python)
+[![Coverage Status](https://coveralls.io/repos/github/tylerlong/ringcentral-python/badge.svg?branch=master)](https://coveralls.io/github/tylerlong/ringcentral-python?branch=master)
 
 RingCentral Python Client library
 
@@ -183,5 +184,4 @@ python setup.py sdist upload
 
 ### todo
 
-- ci and testing coverage
 - Support python 3
