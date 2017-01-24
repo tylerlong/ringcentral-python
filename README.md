@@ -6,6 +6,12 @@ RingCentral Python Client library
 ## Installation
 
 ```
+pip install ringcentral_client
+```
+
+or
+
+```
 pip install git+git://github.com/tylerlong/ringcentral-python.git
 ```
 
@@ -147,8 +153,26 @@ receiver=number-to-receiver-sms
 Run `python -m unittest discover`
 
 
+### Release new version
+
+Update version number in setup.py
+
+Create `~/.pypirc` with the following content:
+
+```
+[distutils]
+index-servers=pypi
+
+[pypi]
+repository = https://upload.pypi.org/legacy/
+username = username
+password = password
+```
+
+```
+python setup.py sdist upload
+```
 
 ### todo
 
-- release to pip
 - ci and testing coverage
