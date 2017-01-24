@@ -10,8 +10,8 @@ class SubscriptionTestCase(BaseTestCase):
 
         # subscribe
         events = ['/restapi/v1.0/account/~/extension/~/message-store']
-        subscription = self.rc.subscription(events, self.message_callback)
-        subscription.subscribe()
+        self.subscription = self.rc.subscription(events, self.message_callback)
+        self.subscription.subscribe()
 
         # send an SMS to tigger a notification
         data = {
@@ -23,8 +23,11 @@ class SubscriptionTestCase(BaseTestCase):
 
         # wait for the notification to come
         time.sleep(20)
-        subscription.revoke()
         self.assertGreater(self.count, 0)
+
+    def tearDown(self):
+        self.subscription.revoke()
+        super(SubscriptionTestCase, self).tearDown()
 
 
 if __name__ == '__main__':
