@@ -95,6 +95,24 @@ print r.status_code
 ```
 
 
+### Sample code for binary downloading and uploading
+
+```python
+# Upload
+files = {'image': ('test.png', open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb'), 'image/png')}
+r = self.rc.post('/restapi/v1.0/account/~/extension/~/profile-image', files = files)
+
+# Download
+r = self.rc.get('/restapi/v1.0/account/~/extension/~/profile-image')
+# r.content is the downloaded binary
+```
+
+
+## More sample code
+
+Please refer to the [test cases](https://github.com/tylerlong/ringcentral-python/tree/master/test).
+
+
 ---
 
 ---
@@ -134,4 +152,3 @@ Run `python -m unittest discover`
 
 - release to pip
 - ci and testing coverage
-- add a sample for binary uploading/downloading
