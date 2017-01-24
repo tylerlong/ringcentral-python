@@ -1,5 +1,7 @@
 # ringcentral-python
 
+[![Build status](https://api.travis-ci.org/tylerlong/ringcentral-python.svg?branch=master)](https://travis-ci.org/tylerlong/ringcentral-python)
+
 RingCentral Python Client library
 
 
