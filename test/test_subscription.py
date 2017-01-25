@@ -39,12 +39,14 @@ class SubscriptionTestCase(BaseTestCase):
         self.count = 0
 
         # send an fax to tigger a notification
+        image_file = open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb')
         files = [
             ('json', ('request.json', json.dumps({ 'to': [{ 'phoneNumber': self.receiver }] }), 'application/json')),
             ('attachment', ('test.txt', 'Hello world', 'text/plain')),
-            ('attachment', ('test.png', open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb'), 'image/png')),
+            ('attachment', ('test.png', image_file, 'image/png')),
         ]
         r = self.rc.post('/restapi/v1.0/account/~/extension/~/fax', files = files)
+        image_file.close()
 
         # wait for the notification to come
         time.sleep(20)
