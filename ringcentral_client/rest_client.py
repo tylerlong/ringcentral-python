@@ -80,7 +80,7 @@ class RestClient(object):
         return 'Basic {basic_key}'.format(basic_key = self._basic_key())
 
     def _basic_key(self):
-        return base64.b64encode('{appKey}:{appSecret}'.format(appKey = self.appKey, appSecret = self.appSecret))
+        return base64.b64encode('{appKey}:{appSecret}'.format(appKey = self.appKey, appSecret = self.appSecret).encode('utf-8')).decode('utf-8')
 
     def _request(self, method, endpoint, params = None, json = None, data = None, files = None):
         url = urllib.parse.urljoin(self.server, endpoint)
