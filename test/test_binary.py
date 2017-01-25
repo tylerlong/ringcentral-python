@@ -9,8 +9,7 @@ class BinaryTestCase(BaseTestCase):
         self.assertGreater(len(r.content), 0)
 
     def test_upload_profile_image(self):
-        image_file = open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb')
-        files = {'image': ('test.png', image_file, 'image/png')}
-        r = self.rc.post('/restapi/v1.0/account/~/extension/~/profile-image', files = files)
-        self.assertEqual(204, r.status_code)
-        image_file.close()
+        with open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb') as image_file:
+            files = {'image': ('test.png', image_file, 'image/png')}
+            r = self.rc.post('/restapi/v1.0/account/~/extension/~/profile-image', files = files)
+            self.assertEqual(204, r.status_code)

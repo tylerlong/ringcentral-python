@@ -100,15 +100,14 @@ subscription.revoke()
 ### Send fax
 
 ```python
-image_file = open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb')
-files = [
-    ('json', ('request.json', json.dumps({ 'to': [{ 'phoneNumber': self.receiver }] }), 'application/json')),
-    ('attachment', ('test.txt', 'Hello world', 'text/plain')),
-    ('attachment', ('test.png', image_file, 'image/png')),
-]
-r = self.rc.post('/restapi/v1.0/account/~/extension/~/fax', files = files)
-print r.status_code
-image_file.close()
+with open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb') as image_file:
+    files = [
+        ('json', ('request.json', json.dumps({ 'to': [{ 'phoneNumber': self.receiver }] }), 'application/json')),
+        ('attachment', ('test.txt', 'Hello world', 'text/plain')),
+        ('attachment', ('test.png', image_file, 'image/png')),
+    ]
+    r = self.rc.post('/restapi/v1.0/account/~/extension/~/fax', files = files)
+    print r.status_code
 ```
 
 
@@ -116,10 +115,9 @@ image_file.close()
 
 ```python
 # Upload
-image_file = open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb')
-files = {'image': ('test.png', image_file, 'image/png')}
-r = self.rc.post('/restapi/v1.0/account/~/extension/~/profile-image', files = files)
-image_file.close()
+with open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb') as image_file:
+    files = {'image': ('test.png', image_file, 'image/png')}
+    r = self.rc.post('/restapi/v1.0/account/~/extension/~/profile-image', files = files)
 
 # Download
 r = self.rc.get('/restapi/v1.0/account/~/extension/~/profile-image')
