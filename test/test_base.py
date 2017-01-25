@@ -22,4 +22,4 @@ class BaseTestCase(unittest.TestCase):
 
     def tearDown(self):
         self.rc.revoke()
-        time.sleep(16)
+        time.sleep(12)
