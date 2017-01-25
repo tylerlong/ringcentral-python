@@ -18,7 +18,7 @@ class Subscription(object):
             def message(self, pubnub, message):
                 encryptionKey = base64.b64decode(this.subscription['deliveryMode']['encryptionKey'])
                 aes = AES.new(encryptionKey, AES.MODE_ECB)
-                json = aes.decrypt(base64.b64decode(message.message)).decode('utf-8')
+                json = aes.decrypt(base64.b64decode(message.message)).decode('utf-8').strip()
                 message_callback(json)
         self.callback = MySubscribeCallback()
         self._subscription = None
