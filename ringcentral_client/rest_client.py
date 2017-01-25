@@ -1,7 +1,7 @@
-import urlparse
+import urllib.parse
 import requests
 import base64
-from subscription import Subscription
+from .subscription import Subscription
 
 class RestClient(object):
     def __init__(self, appKey, appSecret, server):
@@ -48,7 +48,7 @@ class RestClient(object):
         return self.post('/restapi/oauth/revoke', data = data)
 
     def authorize_uri(self, redirect_uri, state = ''):
-        url = urlparse.urljoin(self.server, '/restapi/oauth/authorize')
+        url = urllib.parse.urljoin(self.server, '/restapi/oauth/authorize')
         params = {
             'response_type': 'code',
             'state': state,
@@ -83,7 +83,7 @@ class RestClient(object):
         return base64.b64encode('{appKey}:{appSecret}'.format(appKey = self.appKey, appSecret = self.appSecret))
 
     def _request(self, method, endpoint, params = None, json = None, data = None, files = None):
-        url = urlparse.urljoin(self.server, endpoint)
+        url = urllib.parse.urljoin(self.server, endpoint)
         headers = { 'Authorization': self._autorization_header() }
         r = requests.request(method, url, params = params, data = data, json = json, files = files, headers = headers)
         r.raise_for_status()

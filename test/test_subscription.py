@@ -1,4 +1,4 @@
-from test_base import BaseTestCase
+from .test_base import BaseTestCase
 import time
 import json
 import os
