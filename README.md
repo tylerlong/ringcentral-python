@@ -130,58 +130,6 @@ r = self.rc.get('/restapi/v1.0/account/~/extension/~/profile-image')
 Please refer to the [test cases](https://github.com/tylerlong/ringcentral-python/tree/master/test).
 
 
----
+## License
 
----
-
----
-
-
-## Below is for maintainers of this library
-
-### Setup
-
-```
-pip install -Ur requirements.txt
-```
-
-
-### How to test
-
-Create `.env` file with the following content:
-
-```
-production=false
-server=https://platform.devtest.ringcentral.com
-appKey=appKey
-appSecret=appSecret
-username=username
-extension=extension
-password=password
-receiver=number-to-receiver-sms
-```
-
-Run `python -m unittest discover`
-
-Run a specific test case: `python -m unittest test.test_authorization.AuthorizationTestCase`
-
-
-### Release new version
-
-Update version number in setup.py
-
-Create `~/.pypirc` with the following content:
-
-```
-[distutils]
-index-servers=pypi
-
-[pypi]
-repository = https://upload.pypi.org/legacy/
-username = username
-password = password
-```
-
-```
-python setup.py sdist upload
-```
+MIT
