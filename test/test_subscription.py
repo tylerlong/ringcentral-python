@@ -7,14 +7,13 @@ class SubscriptionTestCase(BaseTestCase):
     def setUp(self):
         super(SubscriptionTestCase, self).setUp()
         # subscribe
-        events = ['/restapi/v1.0/account/~/extension/~/message-store']
+        events = [
+            '/restapi/v1.0/account/~/extension/~/message-store',
+        ]
         self.subscription = self.rc.subscription(events, self.message_callback)
         self.subscription.subscribe()
 
     def message_callback(self, message):
-        print '============='
-        print message
-        print '============='
         self.count += 1
 
     def test_pubnub_sms(self):
