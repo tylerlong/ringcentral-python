@@ -183,8 +183,3 @@ password = password
 ```
 python setup.py sdist upload
 ```
-
-### todo
-
-- Support python 3
-- Travis CI test against python 3
