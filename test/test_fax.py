@@ -11,8 +11,3 @@ class FaxTestCase(BaseTestCase):
         ]
         r = self.rc.post('/restapi/v1.0/account/~/extension/~/fax', files = files)
         self.assertEqual(200, r.status_code)
-
-
-if __name__ == '__main__':
-    import unittest
-    unittest.main()

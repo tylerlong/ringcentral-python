@@ -53,8 +53,3 @@ class SubscriptionTestCase(BaseTestCase):
     def tearDown(self):
         self.subscription.revoke()
         super(SubscriptionTestCase, self).tearDown()
-
-
-if __name__ == '__main__':
-    import unittest
-    unittest.main()

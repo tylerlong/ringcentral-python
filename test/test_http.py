@@ -28,8 +28,3 @@ class HttpTestCase(BaseTestCase):
         message_id = r.json()['id']
         r = self.rc.delete('/restapi/v1.0/account/~/extension/~/message-store/{message_id}'.format(message_id = message_id), { 'purge': False })
         self.assertEqual(204, r.status_code)
-
-
-if __name__ == '__main__':
-    import unittest
-    unittest.main()
