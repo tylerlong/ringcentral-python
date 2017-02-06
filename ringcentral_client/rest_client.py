@@ -4,6 +4,7 @@ except: # py2
     import urlparse
 import requests
 import base64
+from threading import Timer
 from .subscription import Subscription
 
 class RestClient(object):
@@ -11,7 +12,21 @@ class RestClient(object):
         self.appKey = appKey
         self.appSecret = appSecret
         self.server = server
-        self.token = None
+        self._token = None
+        self._timer = None
+
+    @property
+    def token(self):
+        return self._token
+
+    @token.setter
+    def token(self, value):
+        self._token = value
+        if self._timer:
+            self._timer.cancel()
+        if value:
+            self._timer = Timer(value['expires_in'] - 120, self.refresh)
+            self._timer.start()
 
     def authorize(self, username = None, extension = None, password = None, auth_code = None, redirect_uri = None):
         if auth_code:
