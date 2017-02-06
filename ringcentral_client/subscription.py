@@ -33,6 +33,7 @@ class Subscription(object):
         self._subscription = value
         if self._timer:
             self._timer.cancel()
+            self._timer = None
         if value:
             self._timer = Timer(value['expiresIn'] - 120, self.refresh)
             self._timer.start()

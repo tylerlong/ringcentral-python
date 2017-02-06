@@ -104,7 +104,10 @@ class RestClient(object):
 
     def _request(self, method, endpoint, params = None, json = None, data = None, files = None):
         url = urlparse.urljoin(self.server, endpoint)
-        headers = { 'Authorization': self._autorization_header() }
+        headers = {
+            'Authorization': self._autorization_header(),
+            'User-Agent': 'ringcentral-python-client'
+        }
         r = requests.request(method, url, params = params, data = data, json = json, files = files, headers = headers)
         r.raise_for_status()
         return r
