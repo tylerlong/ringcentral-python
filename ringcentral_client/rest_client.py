@@ -14,6 +14,7 @@ class RestClient(object):
         self.server = server
         self._token = None
         self._timer = None
+        self.auto_refresh = True
 
     @property
     def token(self):
@@ -24,7 +25,8 @@ class RestClient(object):
         self._token = value
         if self._timer:
             self._timer.cancel()
-        if value:
+            self._timer = None
+        if self.auto_refresh and value:
             self._timer = Timer(value['expires_in'] - 120, self.refresh)
             self._timer.start()
 

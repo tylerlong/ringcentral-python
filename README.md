@@ -32,6 +32,7 @@ from ringcentral_client import RestClient
 rc = RestClient(appKey, appSecret, server)
 ```
 
+
 ### Authorization
 
 ```python
@@ -44,6 +45,14 @@ print 'refreshed'
 r = rc.revoke()
 print 'revoked'
 ```
+
+
+### Authorization Refresh
+
+By default, authorization is automatically refreshed 2 minutes before it expires.
+
+But if you want to refresh it yourself, you can `rc.auto_refresh = False`.
+
 
 ### HTTP Requets
 
@@ -76,6 +85,7 @@ r = rc.delete('/restapi/v1.0/account/~/extension/~/message-store/{message_id}'.f
 print r.status_code
 ```
 
+
 ### Subscription
 
 ```python
@@ -96,6 +106,7 @@ subscription.refresh()
 # Once you no longer need this subscription, don't forget to revoke it
 subscription.revoke()
 ```
+
 
 ### Send fax
 
