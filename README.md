@@ -5,6 +5,8 @@
 
 RingCentral Python Client library
 
+Both Python 2.x and Python 3.x are suppored.
+
 
 ## Installation
 
