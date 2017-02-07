@@ -16,3 +16,6 @@ class FaxTestCase(BaseTestCase):
     def test_list_fax(self):
         r = self.rc.get('/restapi/v1.0/account/~/extension/~/message-store', { 'messageType': "Fax", 'perPage': 1000, 'dataFrom': '2010-01-26T17:49:00.000Z' })
         self.assertEqual(200, r.status_code)
+        records = r.json()['records']
+        self.assertGreater(len(records), 0)
+        self.assertEqual('Fax', records[0]['type'])
