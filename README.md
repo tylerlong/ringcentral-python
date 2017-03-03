@@ -69,7 +69,11 @@ print 'revoked'
 
 By default, authorization is automatically refreshed 2 minutes before it expires.
 
-But if you want to refresh it yourself, you can `rc.auto_refresh = False`.
+**Don't forget** to call `rc.revoke()` when you are done.
+Otherwise your app won't quit because there is a background timer running.
+
+If you want to refresh it yourself, you can `rc.auto_refresh = False`.
+
 
 
 ### HTTP Requets
