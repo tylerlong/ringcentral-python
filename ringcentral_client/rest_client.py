@@ -109,5 +109,8 @@ class RestClient(object):
             'User-Agent': 'ringcentral-python-client'
         }
         r = requests.request(method, url, params = params, data = data, json = json, files = files, headers = headers)
-        r.raise_for_status()
+        try:
+            r.raise_for_status()
+        except:
+            raise Exception('HTTP status code: {0}\n\n{1}'.format(r.status_code, r.text))
         return r
