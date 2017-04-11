@@ -48,7 +48,7 @@ class SubscriptionTestCase(BaseTestCase):
             r = self.rc.post('/restapi/v1.0/account/~/extension/~/fax', files = files)
 
         # wait for the notification to come
-        time.sleep(20)
+        time.sleep(40)
         self.assertGreater(self.count, 0)
 
     def tearDown(self):
