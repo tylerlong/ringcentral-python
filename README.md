@@ -135,11 +135,29 @@ subscription.revoke()
 ```python
 with open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb') as image_file:
     files = [
-        ('json', ('request.json', json.dumps({ 'to': [{ 'phoneNumber': self.receiver }] }), 'application/json')),
+        ('json', ('request.json', json.dumps({ 'to': [{ 'phoneNumber': receiver }] }), 'application/json')),
         ('attachment', ('test.txt', 'Hello world', 'text/plain')),
         ('attachment', ('test.png', image_file, 'image/png')),
     ]
-    r = self.rc.post('/restapi/v1.0/account/~/extension/~/fax', files = files)
+    r = rc.post('/restapi/v1.0/account/~/extension/~/fax', files = files)
+    print r.status_code
+```
+
+
+### Send MMS
+
+```python
+params = {
+    'to': [{'phoneNumber': receiver}],
+    'from': {'phoneNumber': username},
+    'text': 'Hello world'
+}
+with open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb') as image_file:
+    files = [
+        ('json', ('request.json', json.dumps(params), 'application/json')),
+        ('attachment', ('test.png', image_file, 'image/png')),
+    ]
+    r = rc.post('/restapi/v1.0/account/~/extension/~/sms', params, files = files)
     print r.status_code
 ```
 
@@ -150,10 +168,10 @@ with open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb') as image_fi
 # Upload
 with open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb') as image_file:
     files = {'image': ('test.png', image_file, 'image/png')}
-    r = self.rc.post('/restapi/v1.0/account/~/extension/~/profile-image', files = files)
+    r = rc.post('/restapi/v1.0/account/~/extension/~/profile-image', files = files)
 
 # Download
-r = self.rc.get('/restapi/v1.0/account/~/extension/~/profile-image')
+r = rc.get('/restapi/v1.0/account/~/extension/~/profile-image')
 # r.content is the downloaded binary
 ```
 
