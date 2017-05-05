@@ -58,7 +58,6 @@ class Subscription(object):
             return
         self.pubnub.remove_listener(self.callback)
         self.pubnub.unsubscribe().channels(self.subscription['deliveryMode']['address']).execute()
-        self.pubnub.revoke()
         self.pubnub = None
         self.rc.delete('/restapi/v1.0/subscription/{id}'.format(id = self.subscription['id']))
         self.subscription = None
