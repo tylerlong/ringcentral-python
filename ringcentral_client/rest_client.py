@@ -28,6 +28,7 @@ class RestClient(object):
             self._timer = None
         if self.auto_refresh and value:
             self._timer = Timer(value['expires_in'] - 120, self.refresh)
+            self._timer.daemon = True # so main thread won't wait for timer
             self._timer.start()
 
     def authorize(self, username = None, extension = None, password = None, auth_code = None, redirect_uri = None):
