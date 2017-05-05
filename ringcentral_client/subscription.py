@@ -36,6 +36,7 @@ class Subscription(object):
             self._timer = None
         if value:
             self._timer = Timer(value['expiresIn'] - 120, self.refresh)
+            self._timer.daemon = True # so main thread won't wait for timer
             self._timer.start()
 
     def subscribe(self):
