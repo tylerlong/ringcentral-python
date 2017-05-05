@@ -4,4 +4,5 @@ dist/
 *.egg-info/
 .coverage
 .python-version
-.env.*
+.env.prod
+.env.sandbox

@@ -14,12 +14,6 @@ Both Python 2.x and Python 3.x are suppored.
 pip install ringcentral_client
 ```
 
-Or install from GitHub directly:
-
-```
-pip install git+git://github.com/tylerlong/ringcentral-python.git
-```
-
 
 ## Documentation
 
