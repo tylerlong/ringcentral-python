@@ -50,6 +50,8 @@ class RestClient(object):
         return r
 
     def refresh(self):
+        if self.token == None:
+            return
         data = {
             'grant_type': 'refresh_token',
             'refresh_token': self.token['refresh_token'],
