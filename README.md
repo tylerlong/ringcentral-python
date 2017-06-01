@@ -69,7 +69,6 @@ Otherwise your app won't quit because there is a background timer running.
 If you want to refresh it yourself, you can `rc.auto_refresh = False`.
 
 
-
 ### HTTP Requets
 
 ```python
@@ -167,6 +166,39 @@ with open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb') as image_fi
 # Download
 r = rc.get('/restapi/v1.0/account/~/extension/~/profile-image')
 # r.content is the downloaded binary
+```
+
+
+## Authorization Code Flow (3-legged authorization flow)
+
+Please read the official documentation if you don't already know what is [Authorization Code Flow](http://ringcentral-api-docs.readthedocs.io/en/latest/oauth/#authorization-code-flow).
+
+
+### Step 1: build the authorize uri
+
+```python
+uri = rc.authorize_uri('http://example.com/callback', 'state')
+```
+
+
+### Step 2: redirect user to `uri`
+
+User will be prompted to login RingCentral and authorize your app.
+
+If everything goes well, user will be redirect to `http://example.com/callback?code=<auth_code>`.
+
+
+### Step 3: extract auth_code
+
+`http://example.com/callback?code=<auth_code>`
+
+Extract `auth_code` from redirected url.
+
+
+### Step 4: authorize
+
+```python
+rc.authorize(auth_code = auth_code, redirect_uri = 'http://example.com/callback')
 ```
 
 

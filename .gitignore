@@ -6,3 +6,4 @@ dist/
 .python-version
 .env.prod
 .env.sandbox
+.DS_Store
