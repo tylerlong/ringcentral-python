@@ -19,3 +19,16 @@ class FaxTestCase(BaseTestCase):
         records = r.json()['records']
         self.assertGreater(len(records), 0)
         self.assertEqual('Fax', records[0]['type'])
+
+    def test_resend_fax(self):
+        with open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb') as image_file:
+            files = [
+                ('json', ('request.json', json.dumps({ 'to': [{ 'phoneNumber': self.receiver }] }), 'application/json')),
+                ('attachment', ('test.txt', 'Hello world', 'text/plain')),
+                ('attachment', ('test.png', image_file, 'image/png')),
+            ]
+            r = self.rc.post('/restapi/v1.0/account/~/extension/~/fax', files = files)
+            message_id = r.json()['id']
+
+            r = self.rc.post('/restapi/v1.0/account/~/extension/~/fax', { 'originalMessageId': message_id })
+            self.assertEqual(200, r.status_code)
