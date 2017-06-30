@@ -1,3 +1,5 @@
+import sys
+import platform
 try: # py3
     import urllib.parse as urlparse
 except: # py2
@@ -107,9 +109,16 @@ class RestClient(object):
 
     def _request(self, method, endpoint, params = None, json = None, data = None, files = None):
         url = urlparse.urljoin(self.server, endpoint)
+        user_agent_header = '{name} Python {major_lang_version}.{minor_lang_version} {platform}'.format(
+            name = 'tylerlong/ringcentral-python',
+            major_lang_version = sys.version_info[0],
+            minor_lang_version = sys.version_info[1],
+            platform = platform.platform(),
+        )
         headers = {
             'Authorization': self._autorization_header(),
-            'User-Agent': 'ringcentral-python-client'
+            'User-Agent': user_agent_header,
+            'RC-User-Agent': user_agent_header,
         }
         r = requests.request(method, url, params = params, data = data, json = json, files = files, headers = headers)
         try:
