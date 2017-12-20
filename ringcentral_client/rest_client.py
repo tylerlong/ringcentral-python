@@ -38,7 +38,7 @@ class RestClient(object):
             data = {
                 'grant_type': 'authorization_code',
                 'code': auth_code,
-                'redirect_uri': redirectUri,
+                'redirect_uri': redirect_uri,
             }
         else:
             data = {
