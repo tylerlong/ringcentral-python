@@ -33,14 +33,14 @@ Create `~/.pypirc` with the following content:
 
 ```
 [distutils]
-index-servers=pypi
+index-servers = pypi
 
 [pypi]
-repository = https://upload.pypi.org/legacy/
+repository = https://pypi.python.org/pypi
 username = username
 password = password
 ```
 
 ```
-python setup.py sdist upload
+python3 setup.py sdist upload
 ```
