@@ -5,7 +5,7 @@
 
 RingCentral Python Client library
 
-Both Python 2.x and Python 3.x are suppored.
+Both Python 2.x and Python 3.x are supported.
 
 
 ## Installation
@@ -101,15 +101,17 @@ print r.status_code
 ```
 
 
-### Subscription
+### PubNub subscription
 
 ```python
+from ringcentral_client import PubNub
+
 def message_callback(message):
     print message
 
 # subscribe
 events = ['/restapi/v1.0/account/~/extension/~/message-store']
-subscription = rc.subscription(events, message_callback)
+subscription = PubNub(rc, events, message_callback)
 subscription.subscribe()
 
 # refresh

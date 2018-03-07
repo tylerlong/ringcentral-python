@@ -2,6 +2,7 @@ from .test_base import BaseTestCase
 import time
 import json
 import os
+from ringcentral_client import PubNub
 
 class SubscriptionTestCase(BaseTestCase):
     def setUp(self):
@@ -10,7 +11,7 @@ class SubscriptionTestCase(BaseTestCase):
         events = [
             '/restapi/v1.0/account/~/extension/~/message-store',
         ]
-        self.subscription = self.rc.subscription(events, self.message_callback)
+        self.subscription = PubNub(self.rc, events, self.message_callback)
         self.subscription.subscribe()
 
     def message_callback(self, message):
@@ -29,7 +30,7 @@ class SubscriptionTestCase(BaseTestCase):
             'to': [{ 'phoneNumber': self.receiver }],
             'text': 'hello world'
         }
-        r = self.rc.post('/restapi/v1.0/account/~/extension/~/sms', data)
+        self.rc.post('/restapi/v1.0/account/~/extension/~/sms', data)
 
         # wait for the notification to come
         time.sleep(20)
@@ -45,7 +46,7 @@ class SubscriptionTestCase(BaseTestCase):
                 ('attachment', ('test.txt', 'Hello world', 'text/plain')),
                 ('attachment', ('test.png', image_file, 'image/png')),
             ]
-            r = self.rc.post('/restapi/v1.0/account/~/extension/~/fax', files = files)
+            self.rc.post('/restapi/v1.0/account/~/extension/~/fax', files = files)
 
         # wait for the notification to come
         time.sleep(40)

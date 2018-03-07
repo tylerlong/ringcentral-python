@@ -1,11 +1,11 @@
 from pubnub.pnconfiguration import PNConfiguration
-from pubnub.pubnub import PubNub
+from pubnub.pubnub import PubNub as PubNubSDK
 from pubnub.callbacks import SubscribeCallback
 from Cryptodome.Cipher import AES
 import base64
 from threading import Timer
 
-class Subscription(object):
+class PubNub(object):
     def __init__(self, rest_client, events, message_callback, status_callback = None, presence_callback = None):
         self.rc = rest_client
         self.events = events
@@ -44,7 +44,7 @@ class Subscription(object):
         self.subscription = r.json()
         pnconfig = PNConfiguration()
         pnconfig.subscribe_key = self.subscription['deliveryMode']['subscriberKey']
-        self.pubnub = PubNub(pnconfig)
+        self.pubnub = PubNubSDK(pnconfig)
         self.pubnub.add_listener(self.callback)
         self.pubnub.subscribe().channels(self.subscription['deliveryMode']['address']).execute()
 
