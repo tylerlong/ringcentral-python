@@ -9,9 +9,9 @@ import base64
 from threading import Timer
 
 class RestClient(object):
-    def __init__(self, appKey, appSecret, server):
-        self.appKey = appKey
-        self.appSecret = appSecret
+    def __init__(self, clientId, clientSecret, server):
+        self.clientId = clientId
+        self.clientSecret = clientSecret
         self.server = server
         self._token = None
         self._timer = None
@@ -77,7 +77,7 @@ class RestClient(object):
             'response_type': 'code',
             'state': state,
             'redirect_uri': redirect_uri,
-            'client_id': self.appKey
+            'client_id': self.clientId
         }
         req = requests.PreparedRequest()
         req.prepare_url(url, params = params)
@@ -104,7 +104,7 @@ class RestClient(object):
         return 'Basic {basic_key}'.format(basic_key = self._basic_key())
 
     def _basic_key(self):
-        return base64.b64encode('{appKey}:{appSecret}'.format(appKey = self.appKey, appSecret = self.appSecret).encode('utf-8')).decode('utf-8')
+        return base64.b64encode('{clientId}:{clientSecret}'.format(clientId = self.clientId, clientSecret = self.clientSecret).encode('utf-8')).decode('utf-8')
 
     def _request(self, method, endpoint, params = None, json = None, data = None, files = None):
         url = urlparse.urljoin(self.server, endpoint)

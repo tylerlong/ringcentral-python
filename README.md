@@ -28,7 +28,7 @@ https://developer.ringcentral.com/api-docs/latest/index.html
 ```python
 from ringcentral_client import RestClient, SANDBOX_SERVER
 
-rc = RestClient(appKey, appSecret, SANDBOX_SERVER)
+rc = RestClient(clientId, clientSecret, SANDBOX_SERVER)
 ```
 
 `SANDBOX_SERVER` is a string constant for `https://platform.devtest.ringcentral.com`.
@@ -39,7 +39,7 @@ rc = RestClient(appKey, appSecret, SANDBOX_SERVER)
 ```python
 from ringcentral_client import RestClient, PRODUCTION_SERVER
 
-rc = RestClient(appKey, appSecret, PRODUCTION_SERVER)
+rc = RestClient(clientId, clientSecret, PRODUCTION_SERVER)
 ```
 
 `PRODUCTION_SERVER` is a string constant for `https://platform.ringcentral.com`.

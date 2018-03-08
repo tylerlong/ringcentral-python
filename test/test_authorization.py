@@ -5,7 +5,7 @@ class AuthorizationTestCase(BaseTestCase):
         url = self.rc.authorize_uri('http://baidu.com', 'state')
         self.assertIn(self.server, url)
         self.assertIn('/restapi/oauth/authorize?', url)
-        self.assertIn('client_id=' + self.appKey, url)
+        self.assertIn('client_id=' + self.clientId, url)
         self.assertIn('state=state', url)
         self.assertIn('redirect_uri=http%3A%2F%2Fbaidu.com', url)
         self.assertIn('response_type=code', url)

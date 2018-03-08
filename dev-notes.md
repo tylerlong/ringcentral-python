@@ -12,8 +12,8 @@ Create `.env` file with the following content:
 ```
 production=false
 server=https://platform.devtest.ringcentral.com
-appKey=appKey
-appSecret=appSecret
+clientId=clientId
+clientSecret=clientSecret
 username=username
 extension=extension
 password=password
