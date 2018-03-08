@@ -92,6 +92,9 @@ class RestClient(object):
     def put(self, endpoint, json = None, params = None, data = None, files = None):
         return self._request('PUT', endpoint, params, json, data, files)
 
+    def patch(self, endpoint, json = None, params = None, data = None, files = None):
+        return self._request('PATCH', endpoint, params, json, data, files)
+
     def delete(self, endpoint, params = None):
         return self._request('DELETE', endpoint, params)
 
