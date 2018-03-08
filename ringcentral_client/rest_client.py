@@ -118,6 +118,7 @@ class RestClient(object):
             'Authorization': self._autorization_header(),
             'User-Agent': user_agent_header,
             'RC-User-Agent': user_agent_header,
+            'X-User-Agent': user_agent_header,
         }
         r = requests.request(method, url, params = params, data = data, json = json, files = files, headers = headers)
         try:
