@@ -216,7 +216,9 @@ https://media.ringcentral.com/restapi/v1.0/account/1111/extension/2222/message-s
 
 You can add access token to the URL:
 
+```
 https://media.ringcentral.com/restapi/v1.0/account/1111/extension/2222/message-store/3333/content/4444?access_token=<theAccessToken>
+```
 
 This is mostly for embedding into sites like Glip temporary (for 1 hr) or for sending to VoiceBase, etc.
 
