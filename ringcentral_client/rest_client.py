@@ -15,7 +15,7 @@ class RestClient(object):
         self.server = server
         self._token = None
         self._timer = None
-        self.auto_refresh = True
+        self.auto_refresh = False
 
     @property
     def token(self):

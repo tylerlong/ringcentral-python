@@ -61,12 +61,9 @@ print 'revoked'
 
 ### Authorization Refresh
 
-By default, authorization is automatically refreshed 2 minutes before it expires.
+If you want the SDK to refresh authroization automatically, you can `rc.auto_refresh = True`.
 
-**Don't forget** to call `rc.revoke()` when you are done.
-Otherwise your app won't quit because there is a background timer running.
-
-If you want to refresh it yourself, you can `rc.auto_refresh = False`.
+If you do so, authorization is refreshed 2 minutes before it expires. **Don't forget** to call `rc.revoke()` when you are done. Otherwise your app won't quit because there is a background timer running.
 
 
 ### HTTP Requets
