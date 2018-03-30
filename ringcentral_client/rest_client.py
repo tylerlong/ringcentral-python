@@ -16,6 +16,7 @@ class RestClient(object):
         self._token = None
         self._timer = None
         self.auto_refresh = False
+        self.debug = False
 
     @property
     def token(self):
@@ -124,7 +125,8 @@ class RestClient(object):
         prepared = req.prepare()
         if multipart_mixed:
             prepared.headers['Content-Type'] = prepared.headers['Content-Type'].replace('multipart/form-data;', 'multipart/mixed;')
-        # pretty_print_POST(prepared)
+        if self.debug:
+            pretty_print_POST(prepared)
         s = requests.Session()
         r = s.send(prepared)
         try:
@@ -133,6 +135,7 @@ class RestClient(object):
             raise Exception('HTTP status code: {0}\n\n{1}'.format(r.status_code, r.text))
         return r
 
+# Blow is for debugging:
 
 def pretty_print_POST(req):
     """
