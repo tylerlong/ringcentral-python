@@ -90,11 +90,11 @@ class RestClient(object):
     def post(self, endpoint, json = None, params = None, data = None, files = None, multipart_mixed = False):
         return self._request('POST', endpoint, params, json, data, files, multipart_mixed)
 
-    def put(self, endpoint, json = None, params = None, data = None, files = None):
-        return self._request('PUT', endpoint, params, json, data, files)
+    def put(self, endpoint, json = None, params = None, data = None, files = None, multipart_mixed = False):
+        return self._request('PUT', endpoint, params, json, data, files, multipart_mixed)
 
-    def patch(self, endpoint, json = None, params = None, data = None, files = None):
-        return self._request('PATCH', endpoint, params, json, data, files)
+    def patch(self, endpoint, json = None, params = None, data = None, files = None, multipart_mixed = False):
+        return self._request('PATCH', endpoint, params, json, data, files, multipart_mixed)
 
     def delete(self, endpoint, params = None):
         return self._request('DELETE', endpoint, params)
