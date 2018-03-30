@@ -86,8 +86,8 @@ class RestClient(object):
     def get(self, endpoint, params = None):
         return self._request('GET', endpoint, params)
 
-    def post(self, endpoint, json = None, params = None, data = None, files = None):
-        return self._request('POST', endpoint, params, json, data, files)
+    def post(self, endpoint, json = None, params = None, data = None, files = None, multipart_mixed = False):
+        return self._request('POST', endpoint, params, json, data, files, multipart_mixed)
 
     def put(self, endpoint, json = None, params = None, data = None, files = None):
         return self._request('PUT', endpoint, params, json, data, files)
@@ -106,7 +106,7 @@ class RestClient(object):
     def _basic_key(self):
         return base64.b64encode('{clientId}:{clientSecret}'.format(clientId = self.clientId, clientSecret = self.clientSecret).encode('utf-8')).decode('utf-8')
 
-    def _request(self, method, endpoint, params = None, json = None, data = None, files = None):
+    def _request(self, method, endpoint, params = None, json = None, data = None, files = None, multipart_mixed = False):
         url = urlparse.urljoin(self.server, endpoint)
         user_agent_header = '{name} Python {major_lang_version}.{minor_lang_version} {platform}'.format(
             name = 'tylerlong/ringcentral-python',
@@ -120,9 +120,32 @@ class RestClient(object):
             'RC-User-Agent': user_agent_header,
             'X-User-Agent': user_agent_header,
         }
-        r = requests.request(method, url, params = params, data = data, json = json, files = files, headers = headers)
+        req = requests.Request(method, url, params = params, data = data, json = json, files = files, headers = headers)
+        prepared = req.prepare()
+        if multipart_mixed:
+            prepared.headers['Content-Type'] = prepared.headers['Content-Type'].replace('multipart/form-data;', 'multipart/mixed;')
+        # pretty_print_POST(prepared)
+        s = requests.Session()
+        r = s.send(prepared)
         try:
             r.raise_for_status()
         except:
             raise Exception('HTTP status code: {0}\n\n{1}'.format(r.status_code, r.text))
         return r
+
+
+def pretty_print_POST(req):
+    """
+    At this point it is completely built and ready
+    to be fired; it is "prepared".
+
+    However pay attention at the formatting used in
+    this function because it is programmed to be pretty
+    printed and may differ from the actual request.
+    """
+    print('{}\n{}\n{}\n\n{}'.format(
+        '-----------START-----------',
+        req.method + ' ' + req.url,
+        '\n'.join('{}: {}'.format(k, v) for k, v in req.headers.items()),
+        req.body,
+    ))
