@@ -14,11 +14,15 @@ class FaxTestCase(BaseTestCase):
             self.assertEqual(200, r.status_code)
 
     def test_list_fax(self):
-        r = self.rc.get('/restapi/v1.0/account/~/extension/~/message-store', { 'messageType': "Fax", 'perPage': 1000, 'dataFrom': '2010-01-26T17:49:00.000Z' })
+        r = self.rc.get('/restapi/v1.0/account/~/extension/~/message-store', { 'messageType': "Fax", 'perPage': 1, 'dataFrom': '2010-01-26T17:49:00.000Z' })
         self.assertEqual(200, r.status_code)
+        # print r.text
         records = r.json()['records']
         self.assertGreater(len(records), 0)
         self.assertEqual('Fax', records[0]['type'])
+
+        # r = self.rc.get('/restapi/v1.0/account/~/extension/~/call-log', { 'perPage': 3 })
+        # print r.text
 
     def test_resend_fax(self):
         with open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb') as image_file:
