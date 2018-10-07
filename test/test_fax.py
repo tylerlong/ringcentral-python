@@ -1,6 +1,7 @@
 from .test_base import BaseTestCase
 import json
 import os
+from datetime import datetime, timedelta
 
 class FaxTestCase(BaseTestCase):
     def test_send_fax(self):
@@ -14,7 +15,8 @@ class FaxTestCase(BaseTestCase):
             self.assertEqual(200, r.status_code)
 
     def test_list_fax(self):
-        r = self.rc.get('/restapi/v1.0/account/~/extension/~/message-store', { 'messageType': "Fax", 'perPage': 1, 'dataFrom': '2010-01-26T17:49:00.000Z' })
+        a_month_ago = datetime.now() - timedelta(days=30)
+        r = self.rc.get('/restapi/v1.0/account/~/extension/~/message-store', { 'messageType': "Fax", 'perPage': 1, 'dataFrom': a_month_ago.isoformat()+'Z' })
         self.assertEqual(200, r.status_code)
         # print r.text
         records = r.json()['records']
