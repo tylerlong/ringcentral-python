@@ -11,7 +11,5 @@ setup(
     license='MIT',
     install_requires=[
         'requests>=2.18.4',
-        'pubnub>=4.0.13',
-        'pycrypto>=2.6.1',
     ],
 )
