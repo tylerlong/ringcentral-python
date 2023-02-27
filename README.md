@@ -1,11 +1,8 @@
 # ringcentral-python
 
-[![Build status](https://api.travis-ci.org/tylerlong/ringcentral-python.svg?branch=master)](https://travis-ci.org/tylerlong/ringcentral-python)
-[![Coverage Status](https://coveralls.io/repos/github/tylerlong/ringcentral-python/badge.svg?branch=master)](https://coveralls.io/github/tylerlong/ringcentral-python?branch=master)
-
 RingCentral Python Client library
 
-Both Python 2.x and Python 3.x are supported.
+Only Python 3.x is supported.
 
 
 ## Getting help and support

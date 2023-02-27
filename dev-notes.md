@@ -27,7 +27,7 @@ Run a specific test case: `python -m unittest test.test_authorization.Authorizat
 
 ## Release new version
 
-Update version number in setup.py
+Update version number in `setup.py`
 
 Create `~/.pypirc` with the following content:
 
@@ -36,10 +36,19 @@ Create `~/.pypirc` with the following content:
 index-servers = pypi
 
 [pypi]
-repository = https://pypi.python.org/pypi
+repository = https://upload.pypi.org/legacy/
 username = username
 password = password
 ```
+
+
+```
+python -m build
+twine upload dist/*
+```
+
+
+below is the **old** way(not work any more):
 
 ```
 python3 setup.py sdist upload

@@ -1,9 +1,6 @@
 import sys
 import platform
-try: # py3
-    import urllib.parse as urlparse
-except: # py2
-    import urlparse
+import urllib.parse as urlparse
 import requests
 import base64
 from threading import Timer
