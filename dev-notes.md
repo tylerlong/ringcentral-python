@@ -47,6 +47,8 @@ python -m build
 twine upload dist/*
 ```
 
+Ref: https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html
+
 
 below is the **old** way(not work any more):
 
