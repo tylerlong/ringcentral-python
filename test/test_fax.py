@@ -18,13 +18,9 @@ class FaxTestCase(BaseTestCase):
         a_month_ago = datetime.now() - timedelta(days=30)
         r = self.rc.get('/restapi/v1.0/account/~/extension/~/message-store', { 'messageType': "Fax", 'perPage': 1, 'dataFrom': a_month_ago.isoformat()+'Z' })
         self.assertEqual(200, r.status_code)
-        # print r.text
         records = r.json()['records']
         self.assertGreater(len(records), 0)
         self.assertEqual('Fax', records[0]['type'])
-
-        # r = self.rc.get('/restapi/v1.0/account/~/extension/~/call-log', { 'perPage': 3 })
-        # print r.text
 
     def test_resend_fax(self):
         with open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb') as image_file:

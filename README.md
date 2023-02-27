@@ -51,43 +51,43 @@ rc = RestClient(clientId, clientSecret, PRODUCTION_SERVER)
 
 ```python
 r = rc.authorize(username, extension, password)
-print 'authorized'
+print('authorized')
 
 r = rc.refresh()
-print 'refreshed'
+print('refreshed')
 
 r = rc.revoke()
-print 'revoked'
+print('revoked')
 ```
 
 
 ### Authorization Refresh
 
-If you want the SDK to refresh authroization automatically, you can `rc.auto_refresh = True`.
+If you want the SDK to refresh authorization automatically, you can `rc.auto_refresh = True`.
 
 If you do so, authorization is refreshed 2 minutes before it expires. **Don't forget** to call `rc.revoke()` when you are done. Otherwise your app won't quit because there is a background timer running.
 
 
-### HTTP Requets
+### HTTP Requests
 
 ```python
 # GET
 r = rc.get('/restapi/v1.0/account/~/extension/~')
-print r.text
+print(r.text)
 
 # POST
 r = rc.post('/restapi/v1.0/account/~/extension/~/sms', {
     'to': [{'phoneNumber': receiver}],
     'from': {'phoneNumber': username},
     'text': 'Hello world'})
-print r.text
+print(r.text)
 
 # PUT
 r = rc.get('/restapi/v1.0/account/~/extension/~/message-store', { 'direction': 'Outbound' })
 message_id = r.json()['records'][0]['id']
 r = rc.put('/restapi/v1.0/account/~/extension/~/message-store/{message_id}'.format(message_id = message_id),
     { 'readStatus': 'Read' })
-print r.text
+print(r.text)
 
 # DELETE
 r = rc.post('/restapi/v1.0/account/~/extension/~/sms', {
@@ -96,7 +96,7 @@ r = rc.post('/restapi/v1.0/account/~/extension/~/sms', {
     'text': 'Hello world'})
 message_id = r.json()['id']
 r = rc.delete('/restapi/v1.0/account/~/extension/~/message-store/{message_id}'.format(message_id = message_id), { 'purge': False })
-print r.status_code
+print(r.status_code)
 ```
 
 
@@ -110,7 +110,7 @@ with open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb') as image_fi
         ('attachment', ('test.png', image_file, 'image/png')),
     ]
     r = rc.post('/restapi/v1.0/account/~/extension/~/fax', files = files)
-    print r.status_code
+    print(r.status_code)
 ```
 
 
@@ -128,7 +128,7 @@ with open(os.path.join(os.path.dirname(__file__), 'test.png'), 'rb') as image_fi
         ('attachment', ('test.png', image_file, 'image/png')),
     ]
     r = rc.post('/restapi/v1.0/account/~/extension/~/sms', params, files = files)
-    print r.status_code
+    print(r.status_code)
 ```
 
 
