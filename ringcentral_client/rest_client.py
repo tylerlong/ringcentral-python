@@ -133,6 +133,8 @@ class RestClient(object):
             r.raise_for_status()
         except:
             raise Exception('HTTP status code: {0}\n\n{1}'.format(r.status_code, r.text))
+        finally:
+            s.close()
         return r
 
 # Blow is for debugging:
