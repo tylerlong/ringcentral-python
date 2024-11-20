@@ -20,18 +20,6 @@ https://developer.ringcentral.com/api-docs/latest/index.html
 
 ## Usage
 
-### For sandbox
-
-```python
-from ringcentral_client import RestClient, SANDBOX_SERVER
-
-rc = RestClient(clientId, clientSecret, SANDBOX_SERVER)
-```
-
-`SANDBOX_SERVER` is a string constant for `https://platform.devtest.ringcentral.com`.
-
-### For production
-
 ```python
 from ringcentral_client import RestClient, PRODUCTION_SERVER
 
@@ -39,6 +27,14 @@ rc = RestClient(clientId, clientSecret, PRODUCTION_SERVER)
 ```
 
 `PRODUCTION_SERVER` is a string constant for `https://platform.ringcentral.com`.
+
+### Debug mode
+
+```python
+rc.debug = True
+```
+
+In debug mode, the SDK will print HTTP request details.
 
 ### Authorization
 
