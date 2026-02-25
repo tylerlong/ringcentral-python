@@ -15,8 +15,8 @@ class MmsTestCase(BaseTestCase):
             os.path.join(os.path.dirname(__file__), "test.png"), "rb"
         ) as image_file:
             files = [
-                ("json", ("request.json", json.dumps(params), "application/json")),
-                ("attachment", ("test.png", image_file, "image/png")),
+                ("whatever1", ("request.json", json.dumps(params), "application/json")),
+                ("whatever2", ("test.png", image_file, "image/png")),
             ]
             r = self.rc.post(
                 "/restapi/v1.0/account/~/extension/~/sms", params, files=files
